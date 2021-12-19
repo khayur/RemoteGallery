@@ -13,10 +13,17 @@ extension UIView {
             layer.borderWidth = 0.0
             layer.cornerRadius = corner
             layer.shadowColor = UIColor.black.cgColor
-            layer.shadowOpacity = opacity
-            layer.shadowRadius = shadow
-            layer.shadowOffset = .zero
-        }
+        layer.shadowOpacity = opacity
+        layer.shadowRadius = shadow
+        layer.shadowOffset = .zero
+    }
+    
+    func applyGradient(colors: [UIColor]) {
+        let gradient = CAGradientLayer()
+        gradient.colors = colors.map { $0.cgColor }
+        gradient.frame = self.bounds
+        self.layer.insertSublayer(gradient, at: 0)
+    }
 }
 
 protocol NibLoadableView: AnyObject {
@@ -30,5 +37,16 @@ extension NibLoadableView where Self: UIView {
     
     static func instantiate() -> Self {
         return Bundle.main.loadNibNamed(nibName, owner: self, options: nil)?.first as! Self
+    }
+}
+
+
+protocol ReusableView: AnyObject {
+    static var defaultReuseIdentifier: String { get }
+}
+
+extension ReusableView where Self: UIView {
+    static var defaultReuseIdentifier: String {
+        return NSStringFromClass(self)
     }
 }
