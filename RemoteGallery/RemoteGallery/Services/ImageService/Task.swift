@@ -1,0 +1,86 @@
+//
+//  Task.swift
+//  RemoteGallery
+//
+//  Created by Yury Khadatovich on 21.12.21.
+//
+
+import Foundation
+
+import UIKit
+
+class Task {
+    weak var owner: AnyObject?
+    let onCompletion: (UIImage?, Error?, FetchOperation) -> Void
+
+    init(_ owner: AnyObject?, onCompletion: @escaping (UIImage?, Error?, FetchOperation) -> Void) {
+        self.owner = owner
+        self.onCompletion = onCompletion
+    }
+}
+
+class Operative {
+    var tasks = [Task]()
+    var receiveData = Data()
+
+    func remove(_ task: Task) {
+        guard let index = tasks.firstIndex(of: task) else {
+            return
+        }
+        tasks.remove(at: index)
+    }
+
+    func update(_ task: Task) {
+        guard let index = tasks.firstIndex(of: task) else {
+            tasks.append(task)
+            return
+        }
+        tasks[index] = task
+    }
+}
+
+extension Task: Equatable {}
+
+func ==(lhs: Task, rhs: Task) -> Bool {
+    guard let lOwner = lhs.owner, let rOwner = rhs.owner else { return false }
+
+    return lOwner.isEqual(rOwner)
+}
+
+public enum FetchOperation {
+
+    case disk
+    case network
+    case error
+
+}
+
+public enum Option {
+    case adjustSize
+}
+
+
+public protocol URLLiteralConvertible {
+    var imageLoaderURL: URL? { get }
+}
+
+extension URL: URLLiteralConvertible {
+    public var imageLoaderURL: URL? {
+        return self
+    }
+}
+
+extension URLComponents: URLLiteralConvertible {
+    public var imageLoaderURL: URL? {
+        return url
+    }
+}
+
+extension String: URLLiteralConvertible {
+    public var imageLoaderURL: URL? {
+        if let string = addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            return URL(string: string)
+        }
+        return URL(string: self)
+    }
+}

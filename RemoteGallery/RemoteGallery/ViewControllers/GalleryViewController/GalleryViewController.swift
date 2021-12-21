@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class GalleryViewController: BaseViewController {
     
@@ -17,9 +18,12 @@ class GalleryViewController: BaseViewController {
     // MARK: - Variables
     
     private var interactor: InteractorProtocol!
+    
+    private var galleryItems: [GalleryDataItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getGalleryItems()
     }
     
     override func configureViews() {
@@ -36,15 +40,13 @@ class GalleryViewController: BaseViewController {
 
 extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        #warning("fix")
-        return 3
+        return galleryItems.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as GalleryItemCollectionViewCell
-        cell.configure(item: GalleryDataItem())
-        #warning("fix")
+        cell.configure(item: galleryItems[indexPath.row])
         return cell
     }
 }
@@ -55,3 +57,25 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - Requests
+
+extension GalleryViewController {
+    private func getGalleryItems() {
+        self.showLoading()
+        interactor.getGalleryData { result in
+            switch result {
+            case .success(let items):
+                var galleryItemsData: [GalleryDataItem] = []
+                items.forEach { key, value in
+                    value.imageName = key
+                    galleryItemsData.append(value)
+                }
+                self.galleryItems = galleryItemsData.sorted(by: { ($0.userName ?? "") < ($1.userName ?? "") })
+                self.galleryCollectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+            self.hideLoading()
+        }
+    }
+}

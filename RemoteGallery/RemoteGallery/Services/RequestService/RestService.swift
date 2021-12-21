@@ -9,12 +9,20 @@ import UIKit
 
 protocol RestServiceProtocol {
     func perform<T: Decodable>(dataRequest: RequestData, completion: @escaping (Result<T>) -> Void)
+    func runImageOperation(dataRequest: RequestData, callback: @escaping (UIImage?) -> ())
 }
+
+let cache = NSCache<NSString, UIImage>()
 
 final class RestServiceProvider {
 
     private let serviceQueue: OperationQueue
     private let serviceSession: URLSession
+
+    private let mediaQueue: OperationQueue
+    private let mediaSession: URLSession
+
+    var imageObservers: [String: [(UIImage?) -> ()]] = [:]
     
     init() {
         let configuration = URLSessionConfiguration.default
@@ -25,12 +33,20 @@ final class RestServiceProvider {
         configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         
         serviceQueue = OperationQueue()
-        serviceQueue.maxConcurrentOperationCount = 2
+        serviceQueue.maxConcurrentOperationCount = 1
         serviceSession = URLSession(configuration: configuration,
                                          delegate: nil,
                                          delegateQueue: serviceQueue)
+
+        mediaQueue = OperationQueue()
+        mediaQueue.maxConcurrentOperationCount = 1
+        mediaQueue.qualityOfService = .default
+        mediaSession = URLSession(configuration: configuration,
+                                       delegate: nil,
+                                       delegateQueue: self.mediaQueue)
     }
 }
+
 
 // MARK: - WebServiceProtocol
 
@@ -64,11 +80,45 @@ extension RestServiceProvider: RestServiceProtocol {
         }
         dataTask.resume()
     }
+
+    func runImageOperation(dataRequest: RequestData, callback: @escaping (UIImage?) -> ()) {
+
+        guard let request: URLRequest = URLRequest.baseUrlRequest(requestData: dataRequest, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData) else { callback(nil); return }
+        guard let path = request.url?.absoluteString else { callback(nil); return }
+
+        if let cachedImage = cache.object(forKey: path as NSString) {
+            callback(cachedImage)
+        }
+
+        if var observers = self.imageObservers[path] {
+            observers.append(callback)
+            self.imageObservers[path] = observers
+            return
+        }
+        self.imageObservers[path] = [callback]
+
+        let task = self.mediaSession.dataTask(with: request, completionHandler: { [weak self] (data, response, error) -> Void in
+            guard let `self` = self else { return }
+
+            var responseImage: UIImage?
+            if let data = data, let image = UIImage(data: data) {
+                responseImage = image
+                cache.setObject(image, forKey: path as NSString)
+            }
+
+            DispatchQueue.main.async {
+                self.imageObservers[path]?.forEach { $0(responseImage) }
+                self.imageObservers.removeValue(forKey: path)
+            }
+        })
+        task.priority = 0.25
+        task.resume()
+    }
 }
 
 // MARK: - Private methods
 extension RestServiceProvider {
-    
+
     private func handleResponse<T: Decodable>(data: Data?, response: URLResponse?, error: Error?, responseHandler: @escaping (Result<T>) -> Void) -> Void {
         URLCache.shared.removeAllCachedResponses()
         guard var data = data, let response = response else {
@@ -77,9 +127,9 @@ extension RestServiceProvider {
             }
             return
         }
-        
+
         let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-        
+
         if data.isEmpty, let emptyJSONData = try? JSONSerialization.data(withJSONObject: [:], options: .prettyPrinted) {
             data = emptyJSONData
         }
@@ -87,7 +137,7 @@ extension RestServiceProvider {
         print("\n ◁ URL:\(String(describing: response.url))")
         print("\n code: \(statusCode) \n-> \(String(data: data, encoding: String.Encoding.utf8)!)\n")
         #endif
-        
+
         DispatchQueue.main.async {
             switch statusCode {
             case 200..<300:
@@ -102,4 +152,3 @@ extension RestServiceProvider {
         }
     }
 }
-

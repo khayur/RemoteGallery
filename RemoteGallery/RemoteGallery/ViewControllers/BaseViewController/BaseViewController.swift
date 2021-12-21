@@ -28,6 +28,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createLoadingView()
         configureServices()
         configureViews()
         
@@ -49,7 +50,7 @@ class BaseViewController: UIViewController {
     func configureServices() {}
     func configureViews() {}
     
-    func createProgressView() {
+    func createLoadingView() {
         loadingView = LoadingView.instantiate()
         loadingView.layer.zPosition = 2
         loadingView.frame = view.bounds

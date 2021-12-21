@@ -35,12 +35,13 @@ struct RequestData {
     var skipError: Bool = false
     var bodyInUrl: Bool = false
     var customUrlString: String?
+    var mediaFileName = ""
     
     init(endpoint: Endpoint,
          httpMethod: HttpMethod,
          params: Parameters = [:],
          contentType: RequestContentType = .json) {
-        self.url = endpoint.rawValue
+        self.url = endpoint.value
         self.httpMethod = httpMethod
         self.params = params
         self.encode = contentType
@@ -62,9 +63,18 @@ extension RequestData {
     
 }
 
-enum Endpoint: String {
-    
-    case galleryData = "task/credits.json"
+enum Endpoint {
+    case galleryData
+    case galleryImage(name: String)
+
+    var value: String {
+        switch self {
+        case .galleryData:
+            return "task/credits.json"
+        case .galleryImage(let name):
+          return "task/\(name).jpg"
+        }
+      }
     
 }
 

@@ -11,7 +11,7 @@ private let IMAGE_QUALITY_COMPRESSION: CGFloat = 0.5
 
 extension URLRequest {
     
-    static func baseUrlRequest(requestData: RequestData) -> URLRequest? {
+    static func baseUrlRequest(requestData: RequestData, cachePolicy: CachePolicy = .reloadIgnoringLocalCacheData) -> URLRequest? {
         
         let urlPath = String(format: "%@%@/%@",
                              Constants.urlScheme,
@@ -21,7 +21,7 @@ extension URLRequest {
         guard let url = URL(string: requestData.customUrlString ?? urlPath) else { return nil }
         
         var request = URLRequest(url: url)
-        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.cachePolicy = cachePolicy
         request.httpMethod = requestData.httpMethod.name
         request.setValue(requestData.encode.rawValue, forHTTPHeaderField: "Accept")
         request.setValue(requestData.encode.rawValue, forHTTPHeaderField: "Content-Type")
@@ -139,5 +139,4 @@ extension URLRequest {
             return nil
         }
     }
-    
 }

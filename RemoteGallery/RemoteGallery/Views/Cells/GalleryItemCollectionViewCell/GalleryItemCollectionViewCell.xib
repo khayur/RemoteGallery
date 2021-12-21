@@ -25,10 +25,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="374" height="597"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j09-EU-6TY">
-                                <rect key="frame" x="0.0" y="522" width="374" height="75"/>
+                                <rect key="frame" x="15" y="482" width="344" height="75"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rHV-6e-eau">
-                                        <rect key="frame" x="152.5" y="18" width="69.5" height="39"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rHV-6e-eau">
+                                        <rect key="frame" x="137.5" y="18" width="69.5" height="39"/>
                                         <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="rHV-6e-eau" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="j09-EU-6TY" secondAttribute="leading" constant="25" id="9Vv-RH-5W3"/>
+                                    <constraint firstItem="rHV-6e-eau" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="j09-EU-6TY" secondAttribute="leading" constant="20" id="9Vv-RH-5W3"/>
                                     <constraint firstItem="rHV-6e-eau" firstAttribute="centerX" secondItem="j09-EU-6TY" secondAttribute="centerX" id="Pbn-4s-8IS"/>
                                     <constraint firstItem="rHV-6e-eau" firstAttribute="centerY" secondItem="j09-EU-6TY" secondAttribute="centerY" id="Xmh-Wc-awi"/>
                                     <constraint firstAttribute="height" constant="75" id="teM-ns-i48"/>
@@ -45,11 +45,11 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="j09-EU-6TY" secondAttribute="bottom" id="1v3-qj-5XP"/>
+                            <constraint firstAttribute="bottom" secondItem="j09-EU-6TY" secondAttribute="bottom" constant="40" id="1v3-qj-5XP"/>
                             <constraint firstAttribute="trailing" secondItem="bJK-eq-Nhn" secondAttribute="trailing" id="IXc-9p-1x5"/>
-                            <constraint firstAttribute="trailing" secondItem="j09-EU-6TY" secondAttribute="trailing" id="LIn-nN-QbG"/>
+                            <constraint firstAttribute="trailing" secondItem="j09-EU-6TY" secondAttribute="trailing" constant="15" id="LIn-nN-QbG"/>
                             <constraint firstItem="bJK-eq-Nhn" firstAttribute="top" secondItem="eUQ-bY-07z" secondAttribute="top" id="LpX-Ew-Dei"/>
-                            <constraint firstItem="j09-EU-6TY" firstAttribute="leading" secondItem="eUQ-bY-07z" secondAttribute="leading" id="RE8-Jb-2sl"/>
+                            <constraint firstItem="j09-EU-6TY" firstAttribute="leading" secondItem="eUQ-bY-07z" secondAttribute="leading" constant="15" id="RE8-Jb-2sl"/>
                             <constraint firstAttribute="bottom" secondItem="bJK-eq-Nhn" secondAttribute="bottom" id="Z2Z-Tc-bN4"/>
                             <constraint firstItem="bJK-eq-Nhn" firstAttribute="leading" secondItem="eUQ-bY-07z" secondAttribute="leading" id="yMe-YA-wQA"/>
                         </constraints>
