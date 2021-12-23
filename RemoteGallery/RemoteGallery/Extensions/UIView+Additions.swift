@@ -9,10 +9,10 @@ import UIKit
 
 extension UIView {
     func applyShadow(corner: CGFloat = 0.0, opacity: Float = 0.1, shadow: CGFloat = 10.0) {
-            layer.masksToBounds = false
-            layer.borderWidth = 0.0
-            layer.cornerRadius = corner
-            layer.shadowColor = UIColor.black.cgColor
+        layer.masksToBounds = false
+        layer.borderWidth = 0.0
+        layer.cornerRadius = corner
+        layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = opacity
         layer.shadowRadius = shadow
         layer.shadowOffset = .zero
@@ -28,6 +28,7 @@ extension UIView {
 
 protocol NibLoadableView: AnyObject {
     static var nibName: String { get }
+    
 }
 
 extension NibLoadableView where Self: UIView {

@@ -11,11 +11,10 @@ class ServiceHolder {
 
     fileprivate static let shared = ServiceHolder()
     fileprivate var registry: [String: Any] = [:]
+    private init() {}
+    
 
     static func setup() {
-//        let resourceLoaderService = ResourceLoader()
-//        ServiceHolder.addService(resourceLoaderService as ResourceLoaderProtocol)
-
         let requestService = RestServiceProvider()
         ServiceHolder.addService(requestService as RestServiceProtocol)
         

@@ -47,20 +47,19 @@ func ==(lhs: Task, rhs: Task) -> Bool {
     return lOwner.isEqual(rOwner)
 }
 
-public enum FetchOperation {
+enum FetchOperation {
 
     case disk
     case network
     case error
-
 }
 
-public enum Option {
+enum Option {
     case adjustSize
 }
 
 
-public protocol URLLiteralConvertible {
+protocol URLLiteralConvertible {
     var imageLoaderURL: URL? { get }
 }
 
@@ -76,7 +75,7 @@ extension URLComponents: URLLiteralConvertible {
     }
 }
 
-extension String: URLLiteralConvertible {
+ extension String: URLLiteralConvertible {
     public var imageLoaderURL: URL? {
         if let string = addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             return URL(string: string)

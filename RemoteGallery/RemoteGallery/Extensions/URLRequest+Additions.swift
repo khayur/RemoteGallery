@@ -18,7 +18,7 @@ extension URLRequest {
                              Constants.baseServerUrl,
                              requestData.url)
 
-        guard let url = URL(string: requestData.customUrlString ?? urlPath) else { return nil }
+        guard let url = URL(string: urlPath) else { return nil }
         
         var request = URLRequest(url: url)
         request.cachePolicy = cachePolicy

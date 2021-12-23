@@ -30,15 +30,9 @@ class HashStorage<K: Hashable, V: Equatable> {
                 key = k
             }
         }
-
         return key
     }
 }
 
 
-extension String {
 
-    public func escape() -> String? {
-        return addingPercentEncoding(withAllowedCharacters: .alphanumerics)
-    }
-}

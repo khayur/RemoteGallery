@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import Combine
+import WebKit
 
-class GalleryViewController: BaseViewController {
-    
-    
+
+class GalleryViewController: BaseViewController, ButtonsDelegate {
     // MARK: - Outlets
     
     @IBOutlet private weak var galleryCollectionView: UICollectionView!
@@ -18,14 +17,20 @@ class GalleryViewController: BaseViewController {
     // MARK: - Variables
     
     private var interactor: InteractorProtocol!
-    
     private var galleryItems: [GalleryDataItem] = []
+    private let webView = WebView()
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         getGalleryItems()
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        webView.frame = view.bounds
+    }
     override func configureViews() {
         galleryCollectionView.register(GalleryItemCollectionViewCell.self)
     }
@@ -33,11 +38,25 @@ class GalleryViewController: BaseViewController {
     override func configureServices() {
         interactor = ServiceHolder.getService() as InteractorProtocol
     }
+    
+    //MARK: - Methods
+    func userButtonPressed(at index: IndexPath) {
+        self.view.addSubview(webView)
+        if let urlString = galleryItems[index.row].userURL {
+        webView.load(urlString)
+        }
+    }
+    
+    func photoButtonPressed(at index: IndexPath) {
+        self.view.addSubview(webView)
+        if let urlString = galleryItems[index.row].photoURL {
+        webView.load(urlString)
+        }
+    }
 }
 
 
 // MARK: - UICollectionViewDataSource
-
 extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return galleryItems.count
@@ -47,10 +66,13 @@ extension GalleryViewController: UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as GalleryItemCollectionViewCell
         cell.configure(item: galleryItems[indexPath.row])
+        cell.delegate = self
+        cell.indexPath = indexPath
         return cell
     }
 }
 
+//MARK: - UICollectionViewDelegate
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return galleryCollectionView.frame.size

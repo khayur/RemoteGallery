@@ -14,6 +14,9 @@ struct Constants {
     static let baseServerUrl = "dev.bgsoft.biz"
 }
 
+/// Converting type's name to String
+/// - Parameter some: Type that will be converted to String
+/// - Returns: String value of parameter's name
 func typeName(_ some: Any) -> String {
     return (some is Any.Type) ? "\(some)" : "\(type(of: some))"
 }

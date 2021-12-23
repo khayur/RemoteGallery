@@ -9,21 +9,13 @@ import UIKit
 
 protocol RestServiceProtocol {
     func perform<T: Decodable>(dataRequest: RequestData, completion: @escaping (Result<T>) -> Void)
-    func runImageOperation(dataRequest: RequestData, callback: @escaping (UIImage?) -> ())
 }
-
-let cache = NSCache<NSString, UIImage>()
 
 final class RestServiceProvider {
 
     private let serviceQueue: OperationQueue
     private let serviceSession: URLSession
 
-    private let mediaQueue: OperationQueue
-    private let mediaSession: URLSession
-
-    var imageObservers: [String: [(UIImage?) -> ()]] = [:]
-    
     init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 30
@@ -33,17 +25,10 @@ final class RestServiceProvider {
         configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         
         serviceQueue = OperationQueue()
-        serviceQueue.maxConcurrentOperationCount = 1
+        serviceQueue.maxConcurrentOperationCount = 3
         serviceSession = URLSession(configuration: configuration,
                                          delegate: nil,
                                          delegateQueue: serviceQueue)
-
-        mediaQueue = OperationQueue()
-        mediaQueue.maxConcurrentOperationCount = 1
-        mediaQueue.qualityOfService = .default
-        mediaSession = URLSession(configuration: configuration,
-                                       delegate: nil,
-                                       delegateQueue: self.mediaQueue)
     }
 }
 
@@ -79,40 +64,6 @@ extension RestServiceProvider: RestServiceProtocol {
             self.handleResponse(data: data, response: response, error: error, responseHandler: responseHandler)
         }
         dataTask.resume()
-    }
-
-    func runImageOperation(dataRequest: RequestData, callback: @escaping (UIImage?) -> ()) {
-
-        guard let request: URLRequest = URLRequest.baseUrlRequest(requestData: dataRequest, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData) else { callback(nil); return }
-        guard let path = request.url?.absoluteString else { callback(nil); return }
-
-        if let cachedImage = cache.object(forKey: path as NSString) {
-            callback(cachedImage)
-        }
-
-        if var observers = self.imageObservers[path] {
-            observers.append(callback)
-            self.imageObservers[path] = observers
-            return
-        }
-        self.imageObservers[path] = [callback]
-
-        let task = self.mediaSession.dataTask(with: request, completionHandler: { [weak self] (data, response, error) -> Void in
-            guard let `self` = self else { return }
-
-            var responseImage: UIImage?
-            if let data = data, let image = UIImage(data: data) {
-                responseImage = image
-                cache.setObject(image, forKey: path as NSString)
-            }
-
-            DispatchQueue.main.async {
-                self.imageObservers[path]?.forEach { $0(responseImage) }
-                self.imageObservers.removeValue(forKey: path)
-            }
-        })
-        task.priority = 0.25
-        task.resume()
     }
 }
 

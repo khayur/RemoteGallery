@@ -9,9 +9,14 @@
 /* Begin PBXBuildFile section */
 		852C3615277269A800688EE0 /* Thread+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852C3614277269A800688EE0 /* Thread+Additions.swift */; };
 		852C36172772729100688EE0 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852C36162772729100688EE0 /* Task.swift */; };
-		852C3619277272BB00688EE0 /* Loasder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852C3618277272BB00688EE0 /* Loasder.swift */; };
+		852C3619277272BB00688EE0 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852C3618277272BB00688EE0 /* Loader.swift */; };
 		852C361C277272EB00688EE0 /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852C361B277272EB00688EE0 /* Disk.swift */; };
 		852C361E2772731700688EE0 /* HashStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852C361D2772731700688EE0 /* HashStorage.swift */; };
+		856F708027728AEB00F8A8AE /* UIButton+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856F707F27728AEB00F8A8AE /* UIButton+Additions.swift */; };
+		856F70C72772922D00F8A8AE /* WKWebView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856F70C62772922D00F8A8AE /* WKWebView+Additions.swift */; };
+		856F70C927738FB700F8A8AE /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856F70C827738FB700F8A8AE /* String+Additions.swift */; };
+		856F70CB2773B63F00F8A8AE /* ButtonsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856F70CA2773B63F00F8A8AE /* ButtonsDelegate.swift */; };
+		856F70CD2773C27400F8A8AE /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856F70CC2773C27300F8A8AE /* WebView.swift */; };
 		857190D3276F9B1000AD5A8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857190D2276F9B1000AD5A8D /* AppDelegate.swift */; };
 		857190DC276F9B1200AD5A8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 857190DB276F9B1200AD5A8D /* Assets.xcassets */; };
 		857190DF276F9B1200AD5A8D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 857190DD276F9B1200AD5A8D /* LaunchScreen.storyboard */; };
@@ -46,9 +51,14 @@
 /* Begin PBXFileReference section */
 		852C3614277269A800688EE0 /* Thread+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Thread+Additions.swift"; sourceTree = "<group>"; };
 		852C36162772729100688EE0 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		852C3618277272BB00688EE0 /* Loasder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loasder.swift; sourceTree = "<group>"; };
+		852C3618277272BB00688EE0 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		852C361B277272EB00688EE0 /* Disk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disk.swift; sourceTree = "<group>"; };
 		852C361D2772731700688EE0 /* HashStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashStorage.swift; sourceTree = "<group>"; };
+		856F707F27728AEB00F8A8AE /* UIButton+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Additions.swift"; sourceTree = "<group>"; };
+		856F70C62772922D00F8A8AE /* WKWebView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebView+Additions.swift"; sourceTree = "<group>"; };
+		856F70C827738FB700F8A8AE /* String+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Additions.swift"; sourceTree = "<group>"; };
+		856F70CA2773B63F00F8A8AE /* ButtonsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsDelegate.swift; sourceTree = "<group>"; };
+		856F70CC2773C27300F8A8AE /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		857190CF276F9B1000AD5A8D /* RemoteGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		857190D2276F9B1000AD5A8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		857190DB276F9B1200AD5A8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -159,6 +169,7 @@
 				857190F6276FA00D00AD5A8D /* BaseView */,
 				857190EC276F9D4100AD5A8D /* Cells */,
 				857190F0276F9F2100AD5A8D /* LoadingView */,
+				856F70CC2773C27300F8A8AE /* WebView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,6 +229,9 @@
 				8571911C276FB11300AD5A8D /* URLRequest+Additions.swift */,
 				85ECDD9F276FBC5500E5C815 /* UICollectionView+Additions.swift */,
 				852C3614277269A800688EE0 /* Thread+Additions.swift */,
+				856F707F27728AEB00F8A8AE /* UIButton+Additions.swift */,
+				856F70C62772922D00F8A8AE /* WKWebView+Additions.swift */,
+				856F70C827738FB700F8A8AE /* String+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -242,6 +256,7 @@
 		85719108276FA60900AD5A8D /* GalleryViewController */ = {
 			isa = PBXGroup;
 			children = (
+				856F70CA2773B63F00F8A8AE /* ButtonsDelegate.swift */,
 				85719109276FA61F00AD5A8D /* GalleryViewController.swift */,
 			);
 			path = GalleryViewController;
@@ -258,8 +273,8 @@
 		85719110276FAAD100AD5A8D /* RequestService */ = {
 			isa = PBXGroup;
 			children = (
-				85719118276FAE1500AD5A8D /* RequestData.swift */,
 				85719116276FACA500AD5A8D /* RestService.swift */,
+				85719118276FAE1500AD5A8D /* RequestData.swift */,
 				85719114276FAC8100AD5A8D /* Result.swift */,
 			);
 			path = RequestService;
@@ -303,7 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				852C36162772729100688EE0 /* Task.swift */,
-				852C3618277272BB00688EE0 /* Loasder.swift */,
+				852C3618277272BB00688EE0 /* Loader.swift */,
 				852C361B277272EB00688EE0 /* Disk.swift */,
 				852C361D2772731700688EE0 /* HashStorage.swift */,
 				85FD9E812772736F0084B939 /* ImageLoader.swift */,
@@ -388,13 +403,16 @@
 				857190F2276F9F8000AD5A8D /* LoadingView.swift in Sources */,
 				85719101276FA29800AD5A8D /* NavigationController.swift in Sources */,
 				85ECDDA9276FCB9400E5C815 /* GalleryItemCollectionViewCell.swift in Sources */,
+				856F708027728AEB00F8A8AE /* UIButton+Additions.swift in Sources */,
 				852C3615277269A800688EE0 /* Thread+Additions.swift in Sources */,
-				852C3619277272BB00688EE0 /* Loasder.swift in Sources */,
+				852C3619277272BB00688EE0 /* Loader.swift in Sources */,
 				857190EF276F9D9E00AD5A8D /* BaseViewController.swift in Sources */,
+				856F70C72772922D00F8A8AE /* WKWebView+Additions.swift in Sources */,
 				857190F8276FA01800AD5A8D /* BaseView.swift in Sources */,
 				85ECDDA0276FBC5500E5C815 /* UICollectionView+Additions.swift in Sources */,
 				85ECDD9E276FBBAC00E5C815 /* BaseCollectionViewCell.swift in Sources */,
 				85719115276FAC8100AD5A8D /* Result.swift in Sources */,
+				856F70C927738FB700F8A8AE /* String+Additions.swift in Sources */,
 				852C361C277272EB00688EE0 /* Disk.swift in Sources */,
 				857190D3276F9B1000AD5A8D /* AppDelegate.swift in Sources */,
 				8571910F276FAAAF00AD5A8D /* ServiceHolder.swift in Sources */,
@@ -403,11 +421,13 @@
 				85719105276FA49200AD5A8D /* UIStoryboard+Additions.swift in Sources */,
 				85ECDDA3276FBCC000E5C815 /* EmptyCollectionViewCell.swift in Sources */,
 				857190FB276FA07000AD5A8D /* UIView+Additions.swift in Sources */,
+				856F70CD2773C27400F8A8AE /* WebView.swift in Sources */,
 				85719113276FAB2600AD5A8D /* Interactor.swift in Sources */,
 				852C36172772729100688EE0 /* Task.swift in Sources */,
 				8571910A276FA61F00AD5A8D /* GalleryViewController.swift in Sources */,
 				85719103276FA2DC00AD5A8D /* UINavigationController+Additions.swift in Sources */,
 				852C361E2772731700688EE0 /* HashStorage.swift in Sources */,
+				856F70CB2773B63F00F8A8AE /* ButtonsDelegate.swift in Sources */,
 				8571910C276FA94700AD5A8D /* UIWidow+Additions.swift in Sources */,
 				857190FE276FA08900AD5A8D /* Constants.swift in Sources */,
 				85ECDD96276FB47100E5C815 /* GalleryDataItem.swift in Sources */,

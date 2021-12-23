@@ -42,6 +42,35 @@
                                     <constraint firstAttribute="height" constant="75" id="teM-ns-i48"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fWy-qv-RbA">
+                                <rect key="frame" x="302" y="25" width="62" height="68"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="hWn-85-wWr">
+                                        <rect key="frame" x="0.0" y="0.0" width="62" height="32"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="User"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="User">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="didPressUserButton:" destination="MNH-b5-96T" eventType="touchUpInside" id="TSb-iQ-ZKf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4L-6D-D5b">
+                                        <rect key="frame" x="0.0" y="37" width="62" height="31"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Photo"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Photo"/>
+                                        <connections>
+                                            <action selector="didPressPhotoButton:" destination="MNH-b5-96T" eventType="touchUpInside" id="3T1-q8-ehf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -50,7 +79,9 @@
                             <constraint firstAttribute="trailing" secondItem="j09-EU-6TY" secondAttribute="trailing" constant="15" id="LIn-nN-QbG"/>
                             <constraint firstItem="bJK-eq-Nhn" firstAttribute="top" secondItem="eUQ-bY-07z" secondAttribute="top" id="LpX-Ew-Dei"/>
                             <constraint firstItem="j09-EU-6TY" firstAttribute="leading" secondItem="eUQ-bY-07z" secondAttribute="leading" constant="15" id="RE8-Jb-2sl"/>
+                            <constraint firstAttribute="trailing" secondItem="fWy-qv-RbA" secondAttribute="trailing" constant="10" id="XaD-Me-kTz"/>
                             <constraint firstAttribute="bottom" secondItem="bJK-eq-Nhn" secondAttribute="bottom" id="Z2Z-Tc-bN4"/>
+                            <constraint firstItem="fWy-qv-RbA" firstAttribute="top" secondItem="eUQ-bY-07z" secondAttribute="top" constant="25" id="xRO-pm-5mo"/>
                             <constraint firstItem="bJK-eq-Nhn" firstAttribute="leading" secondItem="eUQ-bY-07z" secondAttribute="leading" id="yMe-YA-wQA"/>
                         </constraints>
                     </view>
@@ -66,6 +97,8 @@
             <connections>
                 <outlet property="galleryContentView" destination="eUQ-bY-07z" id="LcZ-2U-nsA"/>
                 <outlet property="itemImageView" destination="bJK-eq-Nhn" id="6Wh-or-MyL"/>
+                <outlet property="photoButton" destination="O4L-6D-D5b" id="5pb-5A-a8U"/>
+                <outlet property="userButton" destination="hWn-85-wWr" id="Jer-Mj-DMT"/>
                 <outlet property="usernameGradientView" destination="j09-EU-6TY" id="0uv-EO-URs"/>
                 <outlet property="usernameLabel" destination="rHV-6e-eau" id="R9Z-9J-sH0"/>
             </connections>

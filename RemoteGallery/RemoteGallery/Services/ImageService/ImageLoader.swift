@@ -7,9 +7,9 @@
 
 import UIKit
 
-public struct ImageLoader {
+struct ImageLoader {
     @discardableResult
-    public static func request(with url: URLLiteralConvertible, onCompletion: @escaping (UIImage?, Error?, FetchOperation) -> Void) -> Loader? {
+     static func request(with url: URLLiteralConvertible, onCompletion: @escaping (UIImage?, Error?, FetchOperation) -> Void) -> Loader? {
         guard let imageLoaderUrl = url.imageLoaderURL else { return nil }
 
         let task = Task(nil, onCompletion: onCompletion)
@@ -242,17 +242,17 @@ extension UIImageView {
 extension Loadable where Base: UIImageView {
 
     @discardableResult
-    public func request(with url: URLLiteralConvertible, options: [Option] = []) -> Loader? {
+    func request(with url: URLLiteralConvertible, options: [Option] = []) -> Loader? {
         return request(with: url, placeholder: nil, options: options, onCompletion: { _,_,_  in })
     }
 
     @discardableResult
-    public func request(with url: URLLiteralConvertible, options: [Option] = [], onCompletion: @escaping (UIImage?, Error?, FetchOperation) -> Void) -> Loader? {
+    func request(with url: URLLiteralConvertible, options: [Option] = [], onCompletion: @escaping (UIImage?, Error?, FetchOperation) -> Void) -> Loader? {
         return request(with: url, placeholder: nil, options: options, onCompletion: onCompletion)
     }
 
     @discardableResult
-    public func request(with url: URLLiteralConvertible, placeholder: UIImage?, options: [Option] = [], onCompletion: @escaping (UIImage?, Error?, FetchOperation) -> Void) -> Loader? {
+    func request(with url: URLLiteralConvertible, placeholder: UIImage?, options: [Option] = [], onCompletion: @escaping (UIImage?, Error?, FetchOperation) -> Void) -> Loader? {
         guard let imageLoaderUrl = url.imageLoaderURL else { return nil }
 
         let imageCompletion: (UIImage?, Error?, FetchOperation) -> Void = { image, error, operation in

@@ -8,7 +8,7 @@
 import UIKit
 
 class NavigationController: UINavigationController {
-
+//MARK: - Variables
     @IBInspectable var color: UIColor?
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -18,18 +18,7 @@ class NavigationController: UINavigationController {
     override var shouldAutorotate: Bool {
         return false
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        if #available(iOS 13.0, *) {
-            overrideUserInterfaceStyle = .light
-        }
-
-        navigationBar.setup(barColor: color)
-        view.backgroundColor = color
-    }
-
+    
     override var modalPresentationStyle: UIModalPresentationStyle {
         get {
             return .fullScreen
@@ -39,5 +28,17 @@ class NavigationController: UINavigationController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return viewControllers.last?.preferredStatusBarStyle ?? .lightContent
+    }
+
+//MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+
+        navigationBar.setup(barColor: color)
+        view.backgroundColor = color
     }
 }
